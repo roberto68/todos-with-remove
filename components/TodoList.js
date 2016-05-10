@@ -1,24 +1,19 @@
 import React, { PropTypes } from 'react'
 import Todo from './Todo'
 
-const TodoList = ({ todos, onTodoClick, onCheck }) => (
+const TodoList = ({ todos, onTodoClick, onSelect }) => (
   <ul>
-    <div>
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          {...todo}
-          onClick={() => onTodoClick(todo.id)}
-          />
-        // input rather as children of <li> element???
-      )}
-      {todos.map(todo =>
-        <input type="checkbox" key={todo.id} onChange={() => onCheck(todo.id)} ></input>
-        )}
-    </div>
-
+    {todos.map(todo =>
+      <Todo
+        key={todo.id}
+        {...todo}
+        onClick={() => onTodoClick(todo.id)}
+      >
+	<input type="checkbox" onClick={() => onSelect(todo.id)} />
+      </Todo>
+    )}
   </ul>
-)
+) // theoretically I could put that checkbox outside <Todo> and put it same .map !!!
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({

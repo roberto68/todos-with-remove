@@ -1,4 +1,3 @@
-let ids = [];
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -6,25 +5,24 @@ const todo = (state, action) => {
       return {
         id: action.id, // action.id = 0, nextTodoId =1 in actions/index.js
         text: action.text,
-        completed: false 
+        completed: false
         //selected: false
       }
-
     case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
+      if (state.id !== action.id) {  // if not the toggled todo
         return state
       }
-      return Object.assign({}, state, {
+      return Object.assign({}, state, { //... instead Obejct.assign ???
         completed: !state.completed
       })
-    case 'SELECT_TODO':
+    case 'ADD_SELECTED':
       if (state.id !== action.id) {
         return state
       }
-      ids.push(id);
-      return ids
+      selected: !state.selected,
+      console.log(state.selected)
     default:
-    return state
+      return state
   }
 }
 
@@ -37,14 +35,18 @@ const todos = (state = [], action) => {
       ]
     case 'TOGGLE_TODO':
       return state.map(t =>
+        todo(t, action) // ??
+      )
+    case 'ADD_SELECTED':
+      return state.map(t =>
         todo(t, action)
       )
-    case 'REMOVE_TODO':
-      ids.map( (id) => { // treba do statu
+    case 'REMOVE_TODOS':
+      state.selected.map((id) => {
         if (todo.id === id ){
-          return splice(state.todo.id, 1) // dorobit
+          return splice(state.todo, 1) // * keep todos in immutable not just state
           }
-        }) //remove action is dispatched in the footer
+        })
     default:
       return state
   }

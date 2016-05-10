@@ -20,17 +20,17 @@ export const toggleTodo = (id) => {
     id
   }
 }
-//export const removeTodo = (...ids) => {
-export const removeTodos = (ids) => { //dispatched in footer - remove button
+
+export const addSelected = (id) => {
   return {
-    type: 'REMOVE_TODO',
-    ids
+    type: 'ADD_SELECTED',
+    id
   }
 }
 
-export const addSelected = (id) => { //dispatched in TodosList ,Todo
+export const removeSelected = (ids) => { // ids skor
   return {
-    type: 'SELECT_TODO',
-    id
+    type: 'REMOVE_TODOS',
+    ids
   }
 }

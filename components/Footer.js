@@ -1,7 +1,7 @@
 import React from 'react'
 import FilterLink from '../containers/FilterLink'
 
-const Footer = (removeTodos) =>  {
+const Footer = (selected) =>  {
 
 return(
 <div>
@@ -20,10 +20,7 @@ return(
       Completed
     </FilterLink>
   </p>
-  <p><button onClick = { e => {
-     e.preventDefault()
-     removeTodos()
-    }}
+  <p><button onClick = { () => removeSelected(selected) }
 type="submit" name="delete">Delete selected todos</button></p>
 </div>
   )
