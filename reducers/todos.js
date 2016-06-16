@@ -6,7 +6,7 @@ const todo = (state, action) => {
         id: action.id, // action.id = 0, nextTodoId =1 in actions/index.js
         text: action.text,
         completed: false
-        //selected: false
+        //selectedmmutable: false
       }
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {  // if not the toggled todo
@@ -19,11 +19,12 @@ const todo = (state, action) => {
       if (state.id !== action.id) {
         return state
       }
-      selected: !state.selected,
-      console.log(state.selected)
+	return {
+	id: action.id,	
+      	selected: !state.selected,
+	}  
     default:
       return state
-  }
 }
 
 const todos = (state = [], action) => {
@@ -42,11 +43,11 @@ const todos = (state = [], action) => {
         todo(t, action)
       )
     case 'REMOVE_TODOS':
-      state.selected.map((id) => {
-        if (todo.id === id ){
-          return splice(state.todo, 1) // * keep todos in immutable not just state
-          }
-        })
+      state.map(t => { //approach 1: those where selected === true; app 2: put those in arr and del those - but need to remove/add everytime toggled
+        if (todo.selected === true ){
+          return splice(state.todo, 1); // mplement immutable and this way not gonna work          }
+         }
+	})
     default:
       return state
   }
